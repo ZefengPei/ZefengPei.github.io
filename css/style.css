@@ -1668,14 +1668,3 @@ code {
 #header-post #actions {
   direction: ltr !important;
 }
-#aplayer {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 1000 /* 确保播放器始终在最上方 */;
-  background-color: rgba(0,0,0,0.8) /* 添加半透明背景，提高可读性 */;
-}
-#header {
-  margin-top: 60px /* 避免 APlayer 遮挡导航栏 */;
-}
