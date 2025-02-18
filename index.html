@@ -57,13 +57,36 @@
     
     <div class="content index py4 h-card">
         
-          <header id="header">
+          <!-- APlayer 播放器（固定在顶部） -->
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+
+  <!-- APlayer 播放器容器 -->
+  <div id="aplayer"></div>
+
+  <!-- APlayer 初始化 -->
+  <script>
+    const ap = new APlayer({
+        container: document.getElementById('aplayer'),
+        fixed: false, // ❌ 取消底部固定，放到顶部
+        autoplay: false, // 自动播放
+        loop: "all", // 播放模式
+        order: "random", // 播放顺序
+        preload: "auto", // 预加载
+        volume: 0.5, // 音量
+        listFolded: false, // 是否默认折叠
+        listMaxHeight: "200px", // 播放列表最大高度
+        audio: [{&#34;name&#34;:&#34;送你一朵小红花&#34;,&#34;artist&#34;:&#34;Yingjun Zhao&#34;,&#34;url&#34;:&#34;/music/送你一朵小红花.mp3&#34;,&#34;cover&#34;:&#34;/music/送你一朵小红花.jpg&#34;}] // 读取 _config.yml 里的音乐列表
+    });
+  </script>
+
+
+<header id="header">
   <a class="u-url u-uid" href="/">
-  
     
       <img id="logo" alt class="u-logo" src="/images/logo.png" />
     
-  
     <div id="title">
       <h1 class="p-name">Zefeng&#39;s Blog</h1>
     </div>
@@ -100,6 +123,17 @@
     </ul>
   </div>
 </header>
+
+<!-- 监听播放/暂停按钮 -->
+<script>
+  document.getElementById("playButton").addEventListener("click", function () {
+      ap.play();
+  });
+  document.getElementById("pauseButton").addEventListener("click", function () {
+      ap.pause();
+  });
+</script>
+
 
 
         
@@ -210,34 +244,6 @@
     </nav>
   </div>
 </footer>
-
-<!-- APlayer 音乐播放器 -->
-
-  <!-- 引入 APlayer 样式和 JS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
-
-  <!-- APlayer 播放器容器 -->
-  <div id="aplayer"></div>
-
-  <!-- APlayer 初始化 -->
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const ap = new APlayer({
-        container: document.getElementById('aplayer'),
-        fixed: true, // 让播放器固定在页面底部
-        autoplay: false, // 自动播放（转换为 JSON 格式）
-        loop: "all", // 播放模式
-        order: "random", // 播放顺序
-        preload: "auto", // 预加载音乐
-        volume: 0.5, // 默认音量
-        listFolded: false, // 是否默认折叠播放列表
-        listMaxHeight: "200px", // 播放列表最大高度
-        audio: [{"name":"送你一朵小红花","artist":"Yingjun Zhao","url":"/music/送你一朵小红花.mp3","cover":"/music/送你一朵小红花.jpg"}] // 读取 _config.yml 里的音乐列表
-      });
-    });
-  </script>
-
 
 
 
