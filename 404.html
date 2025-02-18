@@ -132,6 +132,7 @@
 
 
 
+
         
         <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
     
@@ -182,44 +183,52 @@
   <script>
     document.addEventListener("DOMContentLoaded", function () {
         console.log("📢 APlayer 开始初始化...");
-        // 初始化 APlayer
-        const ap = new APlayer({
-            container: document.getElementById('aplayer'),
-            fixed: true, // 让播放器固定在页面底部
-            autoplay: false, // 是否自动播放
-            loop: "all", // 播放模式
-            order: "random", // 播放顺序
-            preload: "auto", // 预加载音乐
-            volume: 0.5, // 默认音量
-            listFolded: false, // 是否默认折叠播放列表
-            listMaxHeight: "200px", // 播放列表最大高度
-            audio: [{&#34;name&#34;:&#34;送你一朵小红花&#34;,&#34;artist&#34;:&#34;Yingjun Zhao&#34;,&#34;url&#34;:&#34;/music/送你一朵小红花.mp3&#34;,&#34;cover&#34;:&#34;/music/送你一朵小红花.jpg&#34;}] // 读取 _config.yml 里的音乐列表
-        });
+        try {
+            // 确保 `config.aplayer.audio` 正确解析
+            const audioList = [{"name":"送你一朵小红花","artist":"Yingjun Zhao","url":"/music/送你一朵小红花.mp3","cover":"/music/送你一朵小红花.jpg"}];
 
-        // 存储到全局变量，供 `header.ejs` 使用
-        window.aplayerInstance = ap;
-        console.log("✅ APlayer 初始化成功！🎵");
+            // 初始化 APlayer
+            const ap = new APlayer({
+                container: document.getElementById('aplayer'),
+                fixed: true,
+                autoplay: false,
+                loop: "all",
+                order: "random",
+                preload: "auto",
+                volume: 0.5,
+                listFolded: false,
+                listMaxHeight: "200px",
+                audio: audioList // 确保 JSON 解析正确
+            });
 
-        // 绑定按钮事件（如果 header 按钮已存在）
-        setTimeout(function () {
-            const playButton = document.getElementById("playButton");
-            const pauseButton = document.getElementById("pauseButton");
+            // 存储 APlayer 实例
+            window.aplayerInstance = ap;
+            console.log("✅ APlayer 初始化成功！🎵");
 
-            if (ap && playButton) {
-                playButton.addEventListener("click", function () {
-                    ap.play();
-                });
-                console.log("▶️ 播放按钮已绑定！");
-            }
-            if (ap && pauseButton) {
-                pauseButton.addEventListener("click", function () {
-                    ap.pause();
-                });
-                console.log("⏸ 暂停按钮已绑定！");
-            }
-        }, 1000);
+            // 绑定按钮事件
+            setTimeout(function () {
+                const playButton = document.getElementById("playButton");
+                const pauseButton = document.getElementById("pauseButton");
+
+                if (ap && playButton) {
+                    playButton.addEventListener("click", function () {
+                        ap.play();
+                    });
+                    console.log("▶️ 播放按钮绑定成功！");
+                }
+                if (ap && pauseButton) {
+                    pauseButton.addEventListener("click", function () {
+                        ap.pause();
+                    });
+                    console.log("⏸ 暂停按钮绑定成功！");
+                }
+            }, 1000);
+        } catch (error) {
+            console.error("❌ APlayer 初始化失败！", error);
+        }
     });
   </script>
+
 
 
 
