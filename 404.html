@@ -68,6 +68,8 @@
       <h1 class="p-name">Zefeng&#39;s Blog</h1>
     </div>
   </a>
+
+  <!-- 播放/暂停按钮 -->
   <div id="nav">
     <ul>
       <li class="icon">
@@ -82,9 +84,23 @@
    --><!--
      --><li><a target="_blank" rel="noopener" href="https://github.com/ZefengPei">Projects</a></li><!--
    -->
+
+      <!-- 播放按钮 -->
+      <li>
+        <a href="javascript:void(0);" id="playButton" title="播放音乐">
+          <i class="fa-solid fa-play fa-2x"></i>
+        </a>
+      </li>
+      <!-- 暂停按钮 -->
+      <li>
+        <a href="javascript:void(0);" id="pauseButton" title="暂停音乐">
+          <i class="fa-solid fa-pause fa-2x"></i>
+        </a>
+      </li>
     </ul>
   </div>
 </header>
+
 
         
         <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
@@ -102,26 +118,55 @@
   <div class="footer-left">
     Copyright &copy;
     
-    
-    2016-2025
+    2025
     Zefeng Pei
   </div>
   <div class="footer-right">
     <nav>
       <ul>
-        <!--
-       --><li><a href="/">Home</a></li><!--
-     --><!--
-       --><li><a href="/about/">About</a></li><!--
-     --><!--
-       --><li><a href="/archives/">Writing</a></li><!--
-     --><!--
-       --><li><a target="_blank" rel="noopener" href="https://github.com/ZefengPei">Projects</a></li><!--
-     -->
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="https://github.com/ZefengPei">Projects</a></li>
+        
       </ul>
     </nav>
   </div>
 </footer>
+
+<!-- APlayer 音乐播放器 -->
+
+  <!-- 引入 APlayer 样式和 JS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+
+  <!-- APlayer 播放器容器 -->
+  <div id="aplayer"></div>
+
+  <!-- APlayer 初始化 -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const ap = new APlayer({
+        container: document.getElementById('aplayer'),
+        fixed: true, // 让播放器固定在页面底部
+        autoplay: false, // 自动播放（转换为 JSON 格式）
+        loop: "all", // 播放模式
+        order: "random", // 播放顺序
+        preload: "auto", // 预加载音乐
+        volume: 0.5, // 默认音量
+        listFolded: false, // 是否默认折叠播放列表
+        listMaxHeight: "200px", // 播放列表最大高度
+        audio: [{"name":"送你一朵小红花","artist":"Yingjun Zhao","url":"/music/送你一朵小红花.mp3","cover":"/music/送你一朵小红花.jpg"}] // 读取 _config.yml 里的音乐列表
+      });
+    });
+  </script>
+
+
+
 
     </div>
     <!-- styles -->
