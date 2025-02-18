@@ -101,9 +101,9 @@
 
 <script>
   document.addEventListener("DOMContentLoaded", function () {
-      // 等待 APlayer 加载完成
+      console.log("📢 等待 APlayer 加载...");
       setTimeout(function () {
-          const ap = window.aplayerInstance; // 获取全局 APlayer 实例
+          const ap = window.aplayerInstance;
           const playButton = document.getElementById("playButton");
           const pauseButton = document.getElementById("pauseButton");
 
@@ -112,18 +112,21 @@
                   playButton.addEventListener("click", function () {
                       ap.play();
                   });
+                  console.log("▶️ 播放按钮绑定成功！");
               }
               if (pauseButton) {
                   pauseButton.addEventListener("click", function () {
                       ap.pause();
                   });
+                  console.log("⏸ 暂停按钮绑定成功！");
               }
           } else {
-              console.error("APlayer 未加载，无法绑定按钮事件！");
+              console.error("❌ APlayer 未加载，无法绑定按钮！");
           }
-      }, 1000); // 延迟 1 秒，确保 APlayer 加载完成
+      }, 2000);
   });
 </script>
+
 
 
 
@@ -168,6 +171,7 @@
 
 <!-- APlayer 音乐播放器 -->
 
+  <!-- 加载 APlayer 样式和 JS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
   <script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
 
@@ -177,8 +181,9 @@
   <!-- APlayer 初始化 -->
   <script>
     document.addEventListener("DOMContentLoaded", function () {
-        // 初始化 APlayer 并存入全局变量
-        window.aplayerInstance = new APlayer({
+        console.log("📢 APlayer 开始初始化...");
+        // 初始化 APlayer
+        const ap = new APlayer({
             container: document.getElementById('aplayer'),
             fixed: true, // 让播放器固定在页面底部
             autoplay: false, // 是否自动播放
@@ -191,10 +196,31 @@
             audio: [{&#34;name&#34;:&#34;送你一朵小红花&#34;,&#34;artist&#34;:&#34;Yingjun Zhao&#34;,&#34;url&#34;:&#34;/music/送你一朵小红花.mp3&#34;,&#34;cover&#34;:&#34;/music/送你一朵小红花.jpg&#34;}] // 读取 _config.yml 里的音乐列表
         });
 
-        console.log("APlayer 初始化成功！");
+        // 存储到全局变量，供 `header.ejs` 使用
+        window.aplayerInstance = ap;
+        console.log("✅ APlayer 初始化成功！🎵");
 
+        // 绑定按钮事件（如果 header 按钮已存在）
+        setTimeout(function () {
+            const playButton = document.getElementById("playButton");
+            const pauseButton = document.getElementById("pauseButton");
+
+            if (ap && playButton) {
+                playButton.addEventListener("click", function () {
+                    ap.play();
+                });
+                console.log("▶️ 播放按钮已绑定！");
+            }
+            if (ap && pauseButton) {
+                pauseButton.addEventListener("click", function () {
+                    ap.pause();
+                });
+                console.log("⏸ 暂停按钮已绑定！");
+            }
+        }, 1000);
     });
   </script>
+
 
 
 
