@@ -235,38 +235,35 @@
   </div>
 </footer>
 
-<!-- APlayer 播放器（固定在底部） -->
+<!-- APlayer 音乐播放器 -->
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
   <script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
 
-  <!-- APlayer 容器 -->
+  <!-- APlayer 播放器容器 -->
   <div id="aplayer"></div>
 
   <!-- APlayer 初始化 -->
   <script>
-    const ap = new APlayer({
-        container: document.getElementById('aplayer'),
-        fixed: true, // ✅ 让播放器固定在底部
-        autoplay: false,
-        loop: "all",
-        order: "random",
-        preload: "auto",
-        volume: 0.5,
-        listFolded: false,
-        listMaxHeight: "200px",
-        audio: [{&#34;name&#34;:&#34;送你一朵小红花&#34;,&#34;artist&#34;:&#34;Yingjun Zhao&#34;,&#34;url&#34;:&#34;/music/送你一朵小红花.mp3&#34;,&#34;cover&#34;:&#34;/music/送你一朵小红花.jpg&#34;}]
-    });
+    document.addEventListener("DOMContentLoaded", function () {
+        // 初始化 APlayer 并存入全局变量
+        window.aplayerInstance = new APlayer({
+            container: document.getElementById('aplayer'),
+            fixed: true, // 让播放器固定在页面底部
+            autoplay: false, // 是否自动播放
+            loop: "all", // 播放模式
+            order: "random", // 播放顺序
+            preload: "auto", // 预加载音乐
+            volume: 0.5, // 默认音量
+            listFolded: false, // 是否默认折叠播放列表
+            listMaxHeight: "200px", // 播放列表最大高度
+            audio: [{&#34;name&#34;:&#34;送你一朵小红花&#34;,&#34;artist&#34;:&#34;Yingjun Zhao&#34;,&#34;url&#34;:&#34;/music/送你一朵小红花.mp3&#34;,&#34;cover&#34;:&#34;/music/送你一朵小红花.jpg&#34;}] // 读取 _config.yml 里的音乐列表
+        });
 
-    // 监听播放/暂停按钮
-    document.getElementById("playButton").addEventListener("click", function () {
-        ap.play();
-    });
-    document.getElementById("pauseButton").addEventListener("click", function () {
-        ap.pause();
+        console.log("APlayer 初始化成功！");
+
     });
   </script>
-
 
 
 
